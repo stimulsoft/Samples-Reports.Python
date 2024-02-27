@@ -7,7 +7,7 @@ from stimulsoft_reports.viewer import StiViewer
 app = Flask(__name__)
 
 def endExportReport(args: StiExportEventArgs):
-    filePath = os.path.normpath(os.getcwd() + "\\static\\reports\\" + args.fileName)
+    filePath = os.path.normpath(os.getcwd() + url_for('static', filename='reports/' + args.fileName))
     with open(filePath, mode='wb') as file:
         file.write(args.data)
         file.close()
@@ -22,7 +22,8 @@ def index():
         return viewer.getFrameworkResponse()
     
     report = StiReport()
-    report.loadFile(url_for('static', filename='reports/SimpleList.mrt'))
+    reportUrl = url_for('static', filename = 'reports/SimpleList.mrt')
+    report.loadFile(reportUrl)
     viewer.report = report
 
     return viewer.getFrameworkResponse()

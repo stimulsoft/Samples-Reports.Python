@@ -11,7 +11,7 @@ def openedReport(args: StiReportEventArgs):
     args.report['ReportAlias'] = 'Report Alias from Server-Side'
 
     # Or you can upload a new one
-    filePath = os.path.normpath(os.getcwd() + "\\static\\reports\\SimpleList.mrt")
+    filePath = os.path.normpath(os.getcwd() + url_for('static', filename = 'reports/SimpleList.mrt'))
     with open(filePath, mode='r', encoding='utf-8') as file:
         args.report = file.read()
         file.close()
@@ -26,7 +26,8 @@ def index():
         return viewer.getFrameworkResponse()
     
     report = StiReport()
-    report.loadFile(url_for('static', filename='reports/SimpleList.mrt'))
+    reportUrl = url_for('static', filename = 'reports/SimpleList.mrt')
+    report.loadFile(reportUrl)
     viewer.report = report
 
     return viewer.getFrameworkResponse()

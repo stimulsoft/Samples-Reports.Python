@@ -16,7 +16,8 @@ def index():
     #viewer.license.setKey('6vJhGtLLLz2GNviWmUTrhSqnO...')
     
     report = StiReport()
-    report.loadFile(url_for('static', filename='reports/SimpleList.mrt'))
+    reportUrl = url_for('static', filename = 'reports/SimpleList.mrt')
+    report.loadFile(reportUrl)
     viewer.report = report
 
     return viewer.getFrameworkResponse()

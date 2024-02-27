@@ -9,7 +9,7 @@ from stimulsoft_reports.report import StiReport
 app = Flask(__name__)
 
 def saveReport(args: StiReportEventArgs):
-    filePath = os.path.normpath(os.getcwd() + '\\static\\reports\\' + args.fileName + '2')
+    filePath = os.path.normpath(os.getcwd() + url_for('static', filename = 'reports/' + args.fileName))
     try:
         with open(filePath, mode='w', encoding='utf-8') as file:
             jsonReport = json.dumps(args.report, indent = 4)
@@ -29,7 +29,8 @@ def index():
         return designer.getFrameworkResponse()
     
     report = StiReport()
-    report.loadFile(url_for('static', filename='reports/SimpleList.mrt'))
+    reportUrl = url_for('static', filename = 'reports/SimpleList.mrt')
+    report.loadFile(reportUrl)
     designer.report = report
 
     return designer.getFrameworkResponse()

@@ -13,7 +13,8 @@ def index():
         return viewer.getFrameworkResponse()
     
     report = StiReport()
-    report.loadFile(url_for('static', filename='reports/SimpleList.mrt'))
+    reportUrl = url_for('static', filename = 'reports/SimpleList.mrt')
+    report.loadFile(reportUrl)
     viewer.report = report
 
     js = viewer.javascript.getHtml()

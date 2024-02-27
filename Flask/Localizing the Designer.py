@@ -13,7 +13,8 @@ def index():
         return designer.getFrameworkResponse()
     
     report = StiReport()
-    report.loadFile(url_for('static', filename='reports/SimpleList.mrt'))
+    reportUrl = url_for('static', filename = 'reports/SimpleList.mrt')
+    report.loadFile(reportUrl)
     designer.report = report
 
     return designer.getFrameworkResponse()

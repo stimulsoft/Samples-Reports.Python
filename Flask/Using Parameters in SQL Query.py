@@ -18,7 +18,8 @@ def index():
         return viewer.getFrameworkResponse()
     
     report = StiReport()
-    report.loadFile(url_for('static', filename='reports/SimpleListSQLParameters.mrt'))
+    reportUrl = url_for('static', filename = 'reports/SimpleListSQLParameters.mrt')
+    report.loadFile(reportUrl)
     viewer.report = report
 
     return viewer.getFrameworkResponse()

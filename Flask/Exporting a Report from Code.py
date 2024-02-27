@@ -15,7 +15,8 @@ def export():
     if report.processRequest(request):
         return report.getFrameworkResponse()
 
-    report.loadFile(url_for('static', filename='reports/SimpleList.mrt'))
+    reportUrl = url_for('static', filename = 'reports/SimpleList.mrt')
+    report.loadFile(reportUrl)
     report.render()
 
     requestFormat = request.args.get('format')
