@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Registering Data when Creating a New Report</title>
+
+    {{ designerJavaScript|safe }}
+
+    <script>
+        function createReport(args) {
+            debugger;
+            // Creating new DataSet object
+            let dataSet = new Stimulsoft.System.Data.DataSet("Demo");
+
+            // Loading XSD schema file from specified URL to the DataSet object
+            dataSet.readXmlSchemaFile("/static/data/Demo.xsd");
+
+            // Loading XML data file from specified URL to the DataSet object
+            dataSet.readXmlFile("/static/data/Demo.xml");
+
+            // Loading JSON data file (instead of XML data file) from specified URL to the DataSet object
+            //dataSet.readJsonFile("../data/Demo.json");
+
+            // Registering DataSet object
+            args.report.regData("Demo", "Demo", dataSet);
+
+            // Synchronizing data with the report template dictionary
+            args.report.dictionary.synchronize();
+        }
+    </script>
+</head>
+
+<body>
+    {{ designerHtml|safe }}
+</body>
+
+</html>

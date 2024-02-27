@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Working with onDesign and onExit events</title>
+
+    {{ componentJavaScript|safe }}
+
+    <script>
+        function viewerDesign(args) {
+            window.location.href = '/designer';
+        }
+
+        function designerExit(args) {
+            window.location.href = '/';
+        }
+    </script>
+</head>
+
+<body>
+    {{ componentHtml|safe }}
+</body>
+
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Rendering a Report from Code</title>
+
+    {{ reportJavaScript|safe }}
+
+    <script>
+        function afterRender(args) {
+            let json = args.report.saveDocumentToJsonString();
+            document.getElementById("reportJson").innerText = json;
+
+            alert("The report rendering is completed. Pages: " + args.report.renderedPages.count);
+        }
+    </script>
+</head>
+
+<body>
+    {{ reportHtml|safe }}
+    <div id="reportJson"></div>
+</body>
+
+</html>
