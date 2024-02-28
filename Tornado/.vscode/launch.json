@@ -6,9 +6,9 @@
     "configurations": [
         {
             "name": "Python: Tornado",
-            "type": "python",
+            "type": "debugpy",
             "request": "launch",
-            "program": "${file}",
+            "program": "${workspaceFolder}\\app.py",
             "justMyCode": true
         }
     ]

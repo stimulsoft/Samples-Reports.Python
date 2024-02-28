@@ -1,11 +1,11 @@
-import asyncio, os
-from tornado.web import Application, RequestHandler, url
+from tornado.web import RequestHandler
+from stimulsoft_reports import StiHandler
 from stimulsoft_reports.report import StiReport
 from stimulsoft_reports.report.enums import StiExportFormat
 
-class MainHandler(RequestHandler):
+class IndexHandler(RequestHandler):
     def get(self):
-        self.render('Exporting a Report from Code.html')
+        self.render('Exporting_a_Report_from_Code.html', reportJavaScript = '', reportHtml = '')
 
 class ExportHandler(RequestHandler):
     def get(self):
@@ -28,26 +28,13 @@ class ExportHandler(RequestHandler):
             exportFormat = StiExportFormat.HTML
 
         report.exportDocument(exportFormat)
+    
+        js = report.javascript.getHtml()
+        html = report.getHtml()
 
-        return report.getFrameworkResponse(self)
-
-class WebApplication(Application):
-	def __init__(self):
-		handlers = [
-			url(r'/', MainHandler),
-            url(r'/export', ExportHandler, name='export')
-		]
-		settings = dict(
-			template_path=os.path.join(os.path.dirname(__file__), 'templates'),
-			static_path=os.path.join(os.path.dirname(__file__), 'static')
-		)
-		Application.__init__(self, handlers, **settings)
-
-async def main():
-	app = WebApplication()
-	app.listen(8040)
-	print('Starting development server at http://127.0.0.1:8040/')
-	await asyncio.Event().wait()
-
-if __name__ == '__main__':
-	asyncio.run(main())
+        return self.render('Exporting_a_Report_from_Code.html', reportJavaScript = js, reportHtml = html)
+    
+    def post(self):
+        handler = StiHandler()
+        if handler.processRequest(self.request):
+            return handler.getFrameworkResponse(self)

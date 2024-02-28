@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Exporting a Report from Code</title>
+    <style>html, body { font-family: sans-serif }</style>
+
+    {% raw reportJavaScript %}
+</head>
+
+<body>
+    This example shows how you can export a report from code.<br />
+    
+    <br /><br />
+    <a href="{{ reverse_url('Exporting_a_Report_from_Code_Export') }}?format=pdf">Export to PDF</a><br />
+    <a href="{{ reverse_url('Exporting_a_Report_from_Code_Export') }}?format=excel">Export to Excel</a><br />
+    <a href="{{ reverse_url('Exporting_a_Report_from_Code_Export') }}?format=html">Export to HTML</a><br />
+
+    {% raw reportHtml %}
+</body>
+
+</html>
