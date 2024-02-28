@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Registering a Data from Code</title>
+    <style>html, body { font-family: sans-serif }</style>
+
+    {{ viewerJavaScript|safe }}
+
+    <script>
+        function beginProcessData(args) {
+            // Creating new DataSet object
+            let dataSet = new Stimulsoft.System.Data.DataSet("Demo");
+
+            // Loading XSD schema file from specified URL to the DataSet object
+            dataSet.readXmlSchemaFile("/static/data/Demo.xsd");
+
+            // Loading XML data file from specified URL to the DataSet object
+            dataSet.readXmlFile("/static/data/Demo.xml");
+
+            // Loading JSON data file (instead of XML data file) from specified URL to the DataSet object
+            //dataSet.readJsonFile("../data/Demo.json");
+
+            // Removing all connections from the report template
+            args.report.dictionary.databases.clear();
+
+            // Registering DataSet object
+            args.report.regData("Demo", "Demo", dataSet);
+        }
+    </script>
+</head>
+
+<body>
+    {{ viewerHtml|safe }}
+</body>
+
+</html>
