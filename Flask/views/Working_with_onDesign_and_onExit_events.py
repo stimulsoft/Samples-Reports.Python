@@ -1,6 +1,6 @@
 import json
 import os
-from flask import Flask, request, render_template, url_for
+from flask import Blueprint, request, render_template, url_for
 from stimulsoft_reports import StiResult
 from stimulsoft_reports.events import StiReportEventArgs
 from stimulsoft_reports.report import StiReport
@@ -8,7 +8,7 @@ from stimulsoft_reports.viewer import StiViewer
 from stimulsoft_reports.viewer.enums import StiToolbarDisplayMode
 from stimulsoft_reports.designer import StiDesigner
 
-app = Flask(__name__)
+Working_with_onDesign_and_onExit_events = app = Blueprint('Working_with_onDesign_and_onExit_events', __name__)
 
 def saveReport(args: StiReportEventArgs):
     filePath = os.path.normpath(os.getcwd() + url_for('static', filename = 'reports/' + args.fileName))
@@ -20,7 +20,7 @@ def saveReport(args: StiReportEventArgs):
     except Exception as e:
         return StiResult.getError(str(e))
 
-@app.route('/', methods = ['GET', 'POST'])
+@app.route('/Working_with_onDesign_and_onExit_events', methods = ['GET', 'POST'])
 def index():
     viewer = StiViewer()
     viewer.onDesignReport += 'viewerDesign'
@@ -39,9 +39,9 @@ def index():
     js = viewer.javascript.getHtml()
     html = viewer.getHtml()
 
-    return render_template('Working with onDesign and onExit events.html', componentJavaScript = js, componentHtml = html)
+    return render_template('Working_with_onDesign_and_onExit_events.html', componentJavaScript = js, componentHtml = html)
 
-@app.route('/designer', methods = ['GET', 'POST'])
+@app.route('/Working_with_onDesign_and_onExit_events/designer', methods = ['GET', 'POST'])
 def designer():
     designer = StiDesigner()
     designer.onExit += 'designerExit'
@@ -60,7 +60,4 @@ def designer():
     js = designer.javascript.getHtml()
     html = designer.getHtml()
 
-    return render_template('Working with onDesign and onExit events.html', componentJavaScript = js, componentHtml = html)
-
-if __name__ == '__main__':
-    app.run(debug=True, port=8040)
+    return render_template('Working_with_onDesign_and_onExit_events.html', componentJavaScript = js, componentHtml = html)

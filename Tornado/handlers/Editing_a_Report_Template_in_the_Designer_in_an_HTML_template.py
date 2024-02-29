@@ -3,7 +3,7 @@ from stimulsoft_reports import StiHandler
 from stimulsoft_reports.report import StiReport
 from stimulsoft_reports.designer import StiDesigner
 
-class DesignerHandler(RequestHandler):
+class IndexHandler(RequestHandler):
     def get(self):
         designer = StiDesigner()
 

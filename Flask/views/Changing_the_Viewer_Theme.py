@@ -1,10 +1,10 @@
-from flask import Flask, request, url_for
+from flask import Blueprint, request, url_for
 from stimulsoft_reports.report import StiReport
 from stimulsoft_reports.viewer import StiViewer, enums
 
-app = Flask(__name__)
+Changing_the_Viewer_Theme = app = Blueprint('Changing_the_Viewer_Theme', __name__)
 
-@app.route('/', methods = ['GET', 'POST'])
+@app.route('/Changing_the_Viewer_Theme', methods = ['GET', 'POST'])
 def index():
     viewer = StiViewer()
     viewer.options.appearance.backgroundColor = 'black'
@@ -20,6 +20,3 @@ def index():
     viewer.report = report
 
     return viewer.getFrameworkResponse()
-
-if __name__ == '__main__':
-    app.run(debug=True, port=8040)

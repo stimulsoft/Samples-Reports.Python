@@ -3,7 +3,7 @@ from django.templatetags.static import static
 from stimulsoft_reports.report import StiReport
 from stimulsoft_reports.viewer import StiViewer
 
-def viewer(request):
+def index(request):
 	viewer = StiViewer()
 	if viewer.processRequest(request):
 		return viewer.getFrameworkResponse()

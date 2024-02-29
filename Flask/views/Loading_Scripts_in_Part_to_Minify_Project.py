@@ -1,10 +1,10 @@
-from flask import Flask, request, url_for
+from flask import Blueprint, request, url_for
 from stimulsoft_reports.report import StiReport
 from stimulsoft_reports.designer import StiDesigner
 
-app = Flask(__name__)
+Loading_Scripts_in_Part_to_Minify_Project = app = Blueprint('Loading_Scripts_in_Part_to_Minify_Project', __name__)
 
-@app.route('/', methods = ['GET', 'POST'])
+@app.route('/Loading_Scripts_in_Part_to_Minify_Project', methods = ['GET', 'POST'])
 def index():
     designer = StiDesigner()
 
@@ -24,6 +24,3 @@ def index():
     designer.report = report
 
     return designer.getFrameworkResponse()
-
-if __name__ == '__main__':
-    app.run(debug=True, port=8040)

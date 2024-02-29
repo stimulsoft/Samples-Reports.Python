@@ -5,17 +5,17 @@ from stimulsoft_reports.viewer import StiViewer
 
 def index(request):
     viewer = StiViewer()
-    viewer.onBeginProcessData += 'beginProcessData'
-	
+
     if viewer.processRequest(request):
         return viewer.getFrameworkResponse()
-	
+    
+    """Please use one of the methods below to register your license key"""
+    #viewer.license.setFile(url_for('static', filename='private/license.key'))
+    #viewer.license.setKey('6vJhGtLLLz2GNviWmUTrhSqnO...')
+    
     report = StiReport()
     reportUrl = static('reports/SimpleList.mrt')
     report.loadFile(reportUrl)
     viewer.report = report
 
-    js = viewer.javascript.getHtml()
-    html = viewer.getHtml()
-
-    return render(request, 'Registering_a_Data_from_Code.html', {'viewerJavaScript': js, 'viewerHtml': html})
+    return viewer.getFrameworkResponse()

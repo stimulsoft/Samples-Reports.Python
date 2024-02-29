@@ -1,9 +1,9 @@
-from flask import Flask, request, render_template, url_for
+from flask import Blueprint, request, render_template, url_for
 from stimulsoft_reports.report import StiReport
 
-app = Flask(__name__)
+Rendering_a_Report_from_Code = app = Blueprint('Rendering_a_Report_from_Code', __name__)
 
-@app.route('/', methods = ['GET', 'POST'])
+@app.route('/Rendering_a_Report_from_Code', methods = ['GET', 'POST'])
 def index():
     report = StiReport()
     report.onAfterRender += 'afterRender'
@@ -18,7 +18,4 @@ def index():
     js = report.javascript.getHtml()
     html = report.getHtml()
 
-    return render_template('Rendering a Report from Code.html', reportJavaScript = js, reportHtml = html)
-
-if __name__ == '__main__':
-    app.run(debug=True, port=8040)
+    return render_template('Rendering_a_Report_from_Code.html', reportJavaScript = js, reportHtml = html)

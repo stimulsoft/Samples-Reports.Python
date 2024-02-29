@@ -1,14 +1,14 @@
-from flask import Flask, request, render_template, url_for
+from flask import Blueprint, request, render_template, url_for
 from stimulsoft_reports.report import StiReport
 from stimulsoft_reports.report.enums import StiExportFormat
 
-app = Flask(__name__)
+Exporting_a_Report_from_Code = app = Blueprint('Exporting_a_Report_from_Code', __name__)
 
-@app.route('/')
+@app.route('/Exporting_a_Report_from_Code')
 def index():
-    return render_template('Exporting a Report from Code.html')
+    return render_template('Exporting_a_Report_from_Code.html')
 
-@app.route('/export', methods = ['GET', 'POST'])
+@app.route('/Exporting_a_Report_from_Code/export', methods = ['GET', 'POST'])
 def export():
     report = StiReport()
 
@@ -30,7 +30,7 @@ def export():
 
     report.exportDocument(exportFormat)
 
-    return report.getFrameworkResponse()
+    js = report.javascript.getHtml()
+    html = report.getHtml()
 
-if __name__ == '__main__':
-    app.run(debug=True, port=8040)
+    return render_template('Exporting_a_Report_from_Code.html', reportJavaScript = js, reportHtml = html)

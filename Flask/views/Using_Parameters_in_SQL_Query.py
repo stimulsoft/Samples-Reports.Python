@@ -1,15 +1,15 @@
-from flask import Flask, request, url_for
+from flask import Blueprint, request, url_for
 from stimulsoft_reports.events import StiDataEventArgs
 from stimulsoft_reports.report import StiReport
 from stimulsoft_reports.viewer import StiViewer
 
-app = Flask(__name__)
+Using_Parameters_in_SQL_Query = app = Blueprint('Using_Parameters_in_SQL_Query', __name__)
 
 def beginProcessData(args: StiDataEventArgs):
     if args.dataSource == 'customers' and len(args.parameters) > 0:
         args.parameters['Country'].value = 'Germany'
 
-@app.route('/', methods = ['GET', 'POST'])
+@app.route('/Using_Parameters_in_SQL_Query', methods = ['GET', 'POST'])
 def index():
     viewer = StiViewer()
     viewer.onBeginProcessData += beginProcessData
@@ -23,6 +23,3 @@ def index():
     viewer.report = report
 
     return viewer.getFrameworkResponse()
-
-if __name__ == '__main__':
-    app.run(debug=True, port=8040)

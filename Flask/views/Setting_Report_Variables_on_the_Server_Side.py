@@ -1,10 +1,10 @@
 from datetime import datetime
-from flask import Flask, request, url_for
+from flask import Blueprint, request, url_for
 from stimulsoft_reports.events import StiVariablesEventArgs
 from stimulsoft_reports.report import StiReport
 from stimulsoft_reports.viewer import StiViewer
 
-app = Flask(__name__)
+Setting_Report_Variables_on_the_Server_Side = app = Blueprint('Setting_Report_Variables_on_the_Server_Side', __name__)
 
 def prepareVariables(args: StiVariablesEventArgs):
     if len(args.variables) > 0:
@@ -15,7 +15,7 @@ def prepareVariables(args: StiVariablesEventArgs):
         args.variables['Sex'].value = False
         args.variables['BirthDay'].value = datetime(1982, 3, 20, 0, 0, 0)
 
-@app.route('/', methods = ['GET', 'POST'])
+@app.route('/Setting_Report_Variables_on_the_Server_Side', methods = ['GET', 'POST'])
 def index():
     viewer = StiViewer()
     viewer.onPrepareVariables += prepareVariables
@@ -24,11 +24,8 @@ def index():
         return viewer.getFrameworkResponse()
     
     report = StiReport()
-    reportUrl = url_for('static', filename = 'reports/SimpleList.mrt')
+    reportUrl = url_for('static', filename = 'reports/SimpleVariables.mrt')
     report.loadFile(reportUrl)
     viewer.report = report
 
     return viewer.getFrameworkResponse()
-
-if __name__ == '__main__':
-    app.run(debug=True, port=8040)

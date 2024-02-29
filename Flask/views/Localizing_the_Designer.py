@@ -1,10 +1,10 @@
-from flask import Flask, request, url_for
+from flask import Blueprint, request, url_for
 from stimulsoft_reports.report import StiReport
 from stimulsoft_reports.designer import StiDesigner
 
-app = Flask(__name__)
+Localizing_the_Designer = app = Blueprint('Localizing_the_Designer', __name__)
 
-@app.route('/', methods = ['GET', 'POST'])
+@app.route('/Localizing_the_Designer', methods = ['GET', 'POST'])
 def index():
     designer = StiDesigner()
     designer.options.localization = 'de.xml'
@@ -18,6 +18,3 @@ def index():
     designer.report = report
 
     return designer.getFrameworkResponse()
-
-if __name__ == '__main__':
-    app.run(debug=True, port=8040)

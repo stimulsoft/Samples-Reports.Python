@@ -1,10 +1,10 @@
-from flask import Flask, request, url_for
+from flask import Blueprint, request, url_for
 from stimulsoft_reports.events import StiReportEventArgs
 from stimulsoft_reports.report import StiReport
 from stimulsoft_reports.viewer import StiViewer
 import os
 
-app = Flask(__name__)
+Opening_the_Report_in_the_Viewer_and_Changing_it_on_the_Server_Side = app = Blueprint('Opening_the_Report_in_the_Viewer_and_Changing_it_on_the_Server_Side', __name__)
 
 def openedReport(args: StiReportEventArgs):
     # You can change any fields of the report object passed in the args
@@ -17,7 +17,7 @@ def openedReport(args: StiReportEventArgs):
         file.close()
 
 
-@app.route('/', methods = ['GET', 'POST'])
+@app.route('/Opening_the_Report_in_the_Viewer_and_Changing_it_on_the_Server_Side', methods = ['GET', 'POST'])
 def index():
     viewer = StiViewer()
     viewer.onOpenedReport += openedReport
@@ -31,6 +31,3 @@ def index():
     viewer.report = report
 
     return viewer.getFrameworkResponse()
-
-if __name__ == '__main__':
-    app.run(debug=True, port=8040)

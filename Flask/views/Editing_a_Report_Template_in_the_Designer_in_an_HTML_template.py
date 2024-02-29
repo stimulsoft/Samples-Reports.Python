@@ -1,10 +1,10 @@
-from flask import Flask, request, render_template, url_for
+from flask import Blueprint, request, render_template, url_for
 from stimulsoft_reports.report import StiReport
 from stimulsoft_reports.designer import StiDesigner
 
-app = Flask(__name__)
+Editing_a_Report_Template_in_the_Designer_in_an_HTML_template = app = Blueprint('Editing_a_Report_Template_in_the_Designer_in_an_HTML_template', __name__)
 
-@app.route('/', methods = ['GET', 'POST'])
+@app.route('/Editing_a_Report_Template_in_the_Designer_in_an_HTML_template', methods = ['GET', 'POST'])
 def index():
     designer = StiDesigner()
 
@@ -19,7 +19,4 @@ def index():
     js = designer.javascript.getHtml()
     html = designer.getHtml()
 
-    return render_template('Editing a Report Template in the Designer in an HTML template.html', designerJavaScript = js, designerHtml = html)
-
-if __name__ == '__main__':
-    app.run(debug=True, port=8040)
+    return render_template('Editing_a_Report_Template_in_the_Designer_in_an_HTML_template.html', designerJavaScript = js, designerHtml = html)

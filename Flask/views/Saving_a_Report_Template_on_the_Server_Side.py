@@ -1,12 +1,12 @@
 import json
 import os
-from flask import Flask, request, url_for
+from flask import Blueprint, request, url_for
 from stimulsoft_reports import StiResult
 from stimulsoft_reports.designer import StiDesigner
 from stimulsoft_reports.events import StiReportEventArgs
 from stimulsoft_reports.report import StiReport
 
-app = Flask(__name__)
+Saving_a_Report_Template_on_the_Server_Side = app = Blueprint('Saving_a_Report_Template_on_the_Server_Side', __name__)
 
 def saveReport(args: StiReportEventArgs):
     filePath = os.path.normpath(os.getcwd() + url_for('static', filename = 'reports/' + args.fileName))
@@ -20,7 +20,7 @@ def saveReport(args: StiReportEventArgs):
 
     return f'The report was successfully saved to a {args.fileName} file.'
 
-@app.route('/', methods = ['GET', 'POST'])
+@app.route('/Saving_a_Report_Template_on_the_Server_Side', methods = ['GET', 'POST'])
 def index():
     designer = StiDesigner()
     designer.onSaveReport += saveReport
@@ -34,6 +34,3 @@ def index():
     designer.report = report
 
     return designer.getFrameworkResponse()
-
-if __name__ == '__main__':
-    app.run(debug=True, port=8040)

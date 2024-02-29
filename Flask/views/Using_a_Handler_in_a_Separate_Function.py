@@ -1,12 +1,13 @@
-from flask import Flask, request, render_template, url_for
+from flask import Blueprint, request, render_template, url_for
 from stimulsoft_reports import StiHandler
 from stimulsoft_reports.report import StiReport
 from stimulsoft_reports.viewer import StiViewer
 
-app = Flask(__name__)
-mainHandler = StiHandler('/handler')
+Using_a_Handler_in_a_Separate_Function = app = Blueprint('Using_a_Handler_in_a_Separate_Function', __name__)
 
-@app.route('/')
+mainHandler = StiHandler('/Using_a_Handler_in_a_Separate_Function/handler')
+
+@app.route('/Using_a_Handler_in_a_Separate_Function')
 def index():
     viewer = StiViewer()
     viewer.handler = mainHandler
@@ -20,12 +21,9 @@ def index():
     js = viewer.javascript.getHtml()
     html = viewer.getHtml()
 
-    return render_template('Using a Handler in a Separate Function.html', viewerJavaScript = js, viewerHtml = html)
+    return render_template('Using_a_Handler_in_a_Separate_Function.html', viewerJavaScript = js, viewerHtml = html)
 
-@app.route('/handler', methods = ['GET', 'POST'])
+@app.route('/Using_a_Handler_in_a_Separate_Function/handler', methods = ['GET', 'POST'])
 def handler():
     mainHandler.processRequest(request)
     return mainHandler.getFrameworkResponse()
-
-if __name__ == '__main__':
-    app.run(debug=True, port=8040)

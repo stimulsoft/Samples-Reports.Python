@@ -6,23 +6,21 @@ from stimulsoft_reports.viewer import StiViewer
 class IndexHandler(RequestHandler):
     def get(self):
         viewer = StiViewer()
-        viewer.options.appearance.scrollbarsMode = True
-        viewer.options.width = '1000px'
-        viewer.options.height = '600px'
 
         if viewer.processRequest(self.request):
             return viewer.getFrameworkResponse(self)
+        
+        """Please use one of the methods below to register your license key"""
+        #viewer.license.setFile(url_for('static', filename='private/license.key'))
+        #viewer.license.setKey('6vJhGtLLLz2GNviWmUTrhSqnO...')
         
         report = StiReport()
         reportUrl = self.static_url('reports/SimpleList.mrt')
         report.loadFile(reportUrl)
         viewer.report = report
 
-        js = viewer.javascript.getHtml()
-        html = viewer.getHtml()
+        return viewer.getFrameworkResponse(self)
 
-        self.render('Showing_a_Report_in_the_Viewer_in_an_HTML_template.html', viewerJavaScript = js, viewerHtml = html)
-    
     def post(self):
         handler = StiHandler()
         if handler.processRequest(self.request):

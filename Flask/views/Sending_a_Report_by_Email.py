@@ -1,9 +1,9 @@
-from flask import Flask, request, url_for
+from flask import Blueprint, request, url_for
 from stimulsoft_reports.events import StiEmailEventArgs
 from stimulsoft_reports.report import StiReport
 from stimulsoft_reports.viewer import StiViewer
 
-app = Flask(__name__)
+Sending_a_Report_by_Email = app = Blueprint('Sending_a_Report_by_Email', __name__)
 
 def emailReport(args: StiEmailEventArgs):
     args.settings.fromAddr = 'mail.sender@stimulsoft.com'
@@ -13,7 +13,7 @@ def emailReport(args: StiEmailEventArgs):
     args.settings.password = '********'
     return 'The Email has been sent successfully.'
 
-@app.route('/', methods = ['GET', 'POST'])
+@app.route('/Sending_a_Report_by_Email', methods = ['GET', 'POST'])
 def index():
     viewer = StiViewer()
     viewer.options.toolbar.showSendEmailButton = True
@@ -28,6 +28,3 @@ def index():
     viewer.report = report
 
     return viewer.getFrameworkResponse()
-
-if __name__ == '__main__':
-    app.run(debug=True, port=8040)

@@ -3,7 +3,7 @@ from django.templatetags.static import static
 from stimulsoft_reports.report import StiReport
 from stimulsoft_reports.viewer import StiViewer
 
-def viewer(request):
+def index(request):
     viewer = StiViewer()
     viewer.options.appearance.scrollbarsMode = True
     viewer.options.width = '1000px'

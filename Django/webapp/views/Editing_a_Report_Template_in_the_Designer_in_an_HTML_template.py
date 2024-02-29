@@ -3,7 +3,7 @@ from django.templatetags.static import static
 from stimulsoft_reports.report import StiReport
 from stimulsoft_reports.designer import StiDesigner
 
-def designer(request):
+def index(request):
 	designer = StiDesigner()
 
 	if designer.processRequest(request):
