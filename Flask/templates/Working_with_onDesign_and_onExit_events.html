@@ -5,20 +5,29 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>Working with onDesign and onExit events</title>
 
+    <!-- Rendering the necessary JavaScript for the component -->
     {{ componentJavaScript|safe }}
 
     <script>
+        // The function will be called after clicking the Design button on the viewer panel
         function viewerDesign(args) {
+
+            // Redirect to the report designer page
             window.location.href = '/Working_with_onDesign_and_onExit_events/designer';
         }
 
+
+        // The function will be called after clicking the Exit item in the designer menu
         function designerExit(args) {
+
+            // Redirect to the report viewer page
             window.location.href = '/Working_with_onDesign_and_onExit_events';
         }
     </script>
 </head>
 
 <body>
+    <!-- Rendering the visual HTML part of the component -->
     {{ componentHtml|safe }}
 </body>
 

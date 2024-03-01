@@ -5,10 +5,13 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>Registering a Data from Code</title>
 
+    <!-- Rendering the necessary JavaScript for the viewer -->
     {{ viewerJavaScript|safe }}
 
     <script>
+        // The function will be called before requesting data from the database or data files
         function beginProcessData(args) {
+
             // Creating new DataSet object
             let dataSet = new Stimulsoft.System.Data.DataSet("Demo");
 
@@ -31,6 +34,7 @@
 </head>
 
 <body>
+    <!-- Rendering the visual HTML part of the viewer -->
     {{ viewerHtml|safe }}
 </body>
 

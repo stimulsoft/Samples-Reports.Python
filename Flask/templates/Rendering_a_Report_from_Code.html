@@ -5,20 +5,27 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>Rendering a Report from Code</title>
 
+    <!-- Rendering the necessary JavaScript for the report generator -->
     {{ reportJavaScript|safe }}
 
     <script>
+        // The function will be called after building the report
         function afterRender(args) {
+
+            // Saving the report as a JSON string
             let json = args.report.saveDocumentToJsonString();
             document.getElementById("reportJson").innerText = json;
 
+            // Displaying a message with the number of built report pages
             alert("The report rendering is completed. Pages: " + args.report.renderedPages.count);
         }
     </script>
 </head>
 
 <body>
+    <!-- Rendering the HTML part of the report generator and functions for building a report -->
     {{ reportHtml|safe }}
+
     <div id="reportJson"></div>
 </body>
 

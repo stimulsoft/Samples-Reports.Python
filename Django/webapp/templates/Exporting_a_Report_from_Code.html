@@ -6,17 +6,19 @@
     <title>Exporting a Report from Code</title>
     <style>html, body { font-family: sans-serif }</style>
 
+    <!-- Rendering the necessary JavaScript for the report generator -->
     {{ reportJavaScript|safe }}
 </head>
 
 <body>
-    This example shows how you can export a report from code.<br />
+    <h3>This example shows how you can export a report from code.</h3>
+    <hr><br><br>
     
-    <br /><br />
-    <a href="{% url 'Exporting_a_Report_from_Code_Export' %}?format=pdf">Export to PDF</a><br />
-    <a href="{% url 'Exporting_a_Report_from_Code_Export' %}?format=excel">Export to Excel</a><br />
-    <a href="{% url 'Exporting_a_Report_from_Code_Export' %}?format=html">Export to HTML</a><br />
+    <a href="{% url 'Exporting_a_Report_from_Code_Export' %}?format=pdf">Export to PDF</a><br>
+    <a href="{% url 'Exporting_a_Report_from_Code_Export' %}?format=excel">Export to Excel</a><br>
+    <a href="{% url 'Exporting_a_Report_from_Code_Export' %}?format=html">Export to HTML</a><br>
 
+    <!-- Rendering the HTML part of the report generator and functions for exporting the report -->
     {{ reportHtml|safe }}
 </body>
 

@@ -6,10 +6,12 @@
     <title>Editing a Report Template in the Designer in an HTML template</title>
     <style>html, body { font-family: sans-serif }</style>
 
+    <!-- Rendering the necessary JavaScript for the designer -->
     {{ designerJavaScript|safe }}
 </head>
 
 <body>
+    <!-- Rendering the visual HTML part of the designer -->
     {{ designerHtml|safe }}
 </body>
 

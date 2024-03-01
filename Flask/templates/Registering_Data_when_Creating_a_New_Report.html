@@ -5,11 +5,13 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>Registering Data when Creating a New Report</title>
 
+    <!-- Rendering the necessary JavaScript for the designer -->
     {{ designerJavaScript|safe }}
 
     <script>
+        // The function will be called after the report is created before it is assigned to the designer
         function createReport(args) {
-            debugger;
+            
             // Creating new DataSet object
             let dataSet = new Stimulsoft.System.Data.DataSet("Demo");
 
@@ -32,6 +34,7 @@
 </head>
 
 <body>
+    <!-- Rendering the visual HTML part of the designer -->
     {{ designerHtml|safe }}
 </body>
 
