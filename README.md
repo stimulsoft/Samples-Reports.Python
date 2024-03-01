@@ -5,7 +5,7 @@
 ## Overview
 This repository has a Flask web project with a set of examples, each of which is in a separate .py file:
 * [Changing an Export Settings on the Server-Side](https://github.com/stimulsoft/Samples-Reports.Python/blob/main/Flask/views/Changing_an_Export_Settings_on_the_Server_Side.py)
-* [Changing the Viewer Theme](https://github.com/stimulsoft/Samples-Reports.Python/blob/main/Flask/Changing_the_Viewer_Theme.py)
+* [Changing the Viewer Theme](https://github.com/stimulsoft/Samples-Reports.Python/blob/main/Flask/views/Changing_the_Viewer_Theme.py)
 * [Editing a Report Template in the Designer](https://github.com/stimulsoft/Samples-Reports.Python/blob/main/Flask/views/Editing_a_Report_Template_in_the_Designer.py)
 * [Editing a Report Template in the Designer in an HTML template](https://github.com/stimulsoft/Samples-Reports.Python/blob/main/Flask/views/Editing_a_Report_Template_in_the_Designer_in_an_HTML_template.py)
 * [Exporting a Report from Code](https://github.com/stimulsoft/Samples-Reports.Python/blob/main/Flask/views/Exporting_a_Report_from_Code.py)
