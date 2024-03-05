@@ -3,7 +3,7 @@ from django.contrib.staticfiles import views
 from .views import *
 
 urlpatterns = [
-    path('favicon.ico', lambda req: views.serve(req, 'favicon.ico')),
+    path("favicon.ico", lambda req: views.serve(req, "favicon.ico")),
     path("", index.home, name="index"),
     path("Showing_a_Report_in_the_Viewer", Showing_a_Report_in_the_Viewer.index, name="Showing_a_Report_in_the_Viewer"),
     path("Showing_a_Report_in_the_Viewer_in_an_HTML_template", Showing_a_Report_in_the_Viewer_in_an_HTML_template.index, name="Showing_a_Report_in_the_Viewer_in_an_HTML_template"),
