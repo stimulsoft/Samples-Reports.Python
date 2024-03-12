@@ -1,6 +1,6 @@
 # Python and JavaScript samples for Stimulsoft Reports.PYTHON
 
-#### This repository contains the source code of the examples of usage Stimulsoft Reports.PYTHON reporting tool in the Python applications, using HTML/Python code and JavaScript components. The embedded reporting components is fully compatible with Python 3.7 and higher. Full support for Flash, Django and Tornado frameworks, as well as work on any other frameworks.
+#### This repository contains the source code of the examples of usage Stimulsoft Reports.PYTHON reporting tool in the Python applications, using Python code and JavaScript report engine. The embedded reporting components is fully compatible with Python 3.10 and higher. Full support for Flask, Django and Tornado frameworks, as well as work on any other frameworks.
 
 ## Overview
 This repository has a Flask web project with a set of examples, each of which is in a separate .py file:
@@ -40,7 +40,7 @@ After that, in your browser, you can navigate to the following address:
 http://127.0.0.1:8040/
 
 ## About Stimulsoft Reports.PYTHON
-Stimulsoft Reports.PYTHON comprises a set of components for creating, viewing, exporting, and printing reports in applications and projects written in Python. The product supports connections of multiple data types, allowing you to work with reports on the server- and client-sides, and also offers extensive capabilities for data visualization and analysis.
+Stimulsoft Reports.PYTHON comprises a set of components for creating, viewing, exporting, and printing reports in applications and projects written in Python. The product supports connections of multiple data types, allowing you to work with reports using client-server technology, and also offers extensive capabilities for data visualization and analysis.
 
 ## Useful links
 * [Live Demo](http://demo.stimulsoft.com/#Js)
