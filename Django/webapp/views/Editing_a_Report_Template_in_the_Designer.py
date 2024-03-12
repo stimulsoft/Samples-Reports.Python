@@ -4,20 +4,24 @@ from stimulsoft_reports.designer import StiDesigner
 
 
 def index(request):
-	# Creating a designer object
-	designer = StiDesigner()
+    # Creating a designer object
+    designer = StiDesigner()
 
-	# If the request processing was successful, you need to return the result to the client side
-	if designer.processRequest(request):
-		return designer.getFrameworkResponse()
+    # If the request processing was successful, you need to return the result to the client side
+    if designer.processRequest(request):
+        return designer.getFrameworkResponse()
 
-	# Creating a report object and loading a report by URL
-	report = StiReport()
-	reportUrl = static('reports/SimpleList.mrt')
-	report.loadFile(reportUrl)
+    # Creating a report object
+    report = StiReport()
 
-	# Assigning a report object to the designer
-	designer.report = report
+    # Loading a report by URL
+    # This method does not load the report object on the server side, it only generates the necessary JavaScript code
+    # The report will be loaded into a JavaScript object on the client side
+    reportUrl = static('reports/SimpleList.mrt')
+    report.loadFile(reportUrl)
 
-	# Displaying the visual part of the designer as a prepared HTML page
-	return designer.getFrameworkResponse()
+    # Assigning a report object to the designer
+    designer.report = report
+
+    # Displaying the visual part of the designer as a prepared HTML page
+    return designer.getFrameworkResponse()

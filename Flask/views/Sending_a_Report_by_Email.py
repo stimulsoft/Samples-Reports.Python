@@ -24,17 +24,27 @@ def emailReport(args: StiEmailEventArgs):
 
 @app.route('/Sending_a_Report_by_Email', methods = ['GET', 'POST'])
 def index():
-    # Creating a viewer object, defining options and Python events
+    # Creating a viewer object
     viewer = StiViewer()
+
+    # Defining viewer options: displaying the Send Email button
     viewer.options.toolbar.showSendEmailButton = True
+
+    # Defining viewer events
+    # When assigning a function name as a string, it will be called on the JavaScript client side
+    # When assigning a function itself, it will be called on the Python server side
     viewer.onEmailReport += emailReport
 
     # If the request processing was successful, you need to return the result to the client side
     if viewer.processRequest(request):
         return viewer.getFrameworkResponse()
     
-    # Creating a report object and loading a report by URL
+    # Creating a report object
     report = StiReport()
+
+    # Loading a report by URL
+    # This method does not load the report object on the server side, it only generates the necessary JavaScript code
+    # The report will be loaded into a JavaScript object on the client side
     reportUrl = url_for('static', filename = 'reports/SimpleList.mrt')
     report.loadFile(reportUrl)
 

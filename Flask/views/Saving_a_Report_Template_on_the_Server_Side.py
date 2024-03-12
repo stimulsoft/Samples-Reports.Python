@@ -32,16 +32,24 @@ def saveReport(args: StiReportEventArgs):
 
 @app.route('/Saving_a_Report_Template_on_the_Server_Side', methods = ['GET', 'POST'])
 def index():
-    # Creating a designer object and defining Python events
+    # Creating a designer object
     designer = StiDesigner()
+
+    # Defining designer events
+    # When assigning a function name as a string, it will be called on the JavaScript client side
+    # When assigning a function itself, it will be called on the Python server side
     designer.onSaveReport += saveReport
 
     # If the request processing was successful, you need to return the result to the client side
     if designer.processRequest(request):
         return designer.getFrameworkResponse()
     
-    # Creating a report object and loading a report by URL
+    # Creating a report object
     report = StiReport()
+
+    # Loading a report by URL
+    # This method does not load the report object on the server side, it only generates the necessary JavaScript code
+    # The report will be loaded into a JavaScript object on the client side
     reportUrl = url_for('static', filename = 'reports/SimpleList.mrt')
     report.loadFile(reportUrl)
 

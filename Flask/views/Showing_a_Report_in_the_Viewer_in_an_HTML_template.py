@@ -7,8 +7,10 @@ Showing_a_Report_in_the_Viewer_in_an_HTML_template = app = Blueprint('Showing_a_
 
 @app.route('/Showing_a_Report_in_the_Viewer_in_an_HTML_template', methods = ['GET', 'POST'])
 def index():
-    # Creating a viewer object and defining options (enabling the scrollbar, setting the width and height of the viewer)
+    # Creating a viewer object
     viewer = StiViewer()
+
+    # Defining viewer options: enabling the scrollbar, setting the width and height of the viewer
     viewer.options.appearance.scrollbarsMode = True
     viewer.options.width = '1000px'
     viewer.options.height = '600px'
@@ -17,8 +19,12 @@ def index():
     if viewer.processRequest(request):
         return viewer.getFrameworkResponse()
     
-    # Creating a report object and loading a report by URL
+    # Creating a report object
     report = StiReport()
+
+    # Loading a report by URL
+    # This method does not load the report object on the server side, it only generates the necessary JavaScript code
+    # The report will be loaded into a JavaScript object on the client side
     reportUrl = url_for('static', filename = 'reports/SimpleList.mrt')
     report.loadFile(reportUrl)
 

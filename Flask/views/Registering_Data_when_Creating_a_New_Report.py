@@ -6,9 +6,15 @@ Registering_Data_when_Creating_a_New_Report = app = Blueprint('Registering_Data_
 
 @app.route('/Registering_Data_when_Creating_a_New_Report', methods = ['GET', 'POST'])
 def index():
-    # Creating a designer object, defining options and JavaScript events
+    # Creating a designer object
     designer = StiDesigner()
+
+    # Defining designer events
+    # When assigning a function name as a string, it will be called on the JavaScript client side
+    # When assigning a function itself, it will be called on the Python server side
     designer.onCreateReport += 'createReport'
+
+    # Defining designer options: enabling full-screen mode
     designer.options.appearance.fullScreenMode = True
 
     # If the request processing was successful, you need to return the result to the client side

@@ -19,9 +19,15 @@ class ExportHandler(RequestHandler):
         if report.processRequest(self.request):
             return report.getFrameworkResponse(self)
 
-        # Loading a report by URL and calling the report build
+        # Loading a report by URL
+        # This method does not load the report object on the server side, it only generates the necessary JavaScript code
+        # The report will be loaded into a JavaScript object on the client side
         reportUrl = self.static_url('reports/SimpleList.mrt')
         report.loadFile(reportUrl)
+        
+        # Calling the report build
+        # This method does not render the report on the server side, it only generates the necessary JavaScript code
+        # The report will be rendered using a JavaScript engine on the client side
         report.render()
 
         # Getting the export format passed in the GET request parameters
@@ -34,7 +40,9 @@ class ExportHandler(RequestHandler):
         elif requestFormat == 'html':
             exportFormat = StiExportFormat.HTML
 
-        # Calling a report export to a specified format
+        # # Calling the report export to the specified format
+        # This method does not export the report on the server side, it only generates the necessary JavaScript code
+        # The report will be exported using a JavaScript engine on the client side
         report.exportDocument(exportFormat)
 
         # Getting the necessary JavaScript code and HTML part of the report generator

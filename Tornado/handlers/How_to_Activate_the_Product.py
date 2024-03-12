@@ -17,8 +17,12 @@ class IndexHandler(RequestHandler):
         # viewer.license.setFile(self.static_url('private/license.key'))
         # viewer.license.setKey('6vJhGtLLLz2GNviWmUTrhSqnO...')
         
-        # Creating a report object and loading a report by URL
+        # Creating a report object
         report = StiReport()
+
+        # Loading a report by URL
+        # This method does not load the report object on the server side, it only generates the necessary JavaScript code
+        # The report will be loaded into a JavaScript object on the client side
         reportUrl = self.static_url('reports/SimpleList.mrt')
         report.loadFile(reportUrl)
 

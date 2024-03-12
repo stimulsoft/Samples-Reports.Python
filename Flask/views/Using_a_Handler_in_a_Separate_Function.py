@@ -11,13 +11,19 @@ mainHandler = StiHandler('/Using_a_Handler_in_a_Separate_Function/handler')
 
 @app.route('/Using_a_Handler_in_a_Separate_Function')
 def index():
-    # Creating a viewer object and defining options (enabling the scrollbar, setting the event handler)
+    # Creating a viewer object
     viewer = StiViewer()
+
+    # Defining viewer options: setting the event handler, enabling the scrollbar
     viewer.handler = mainHandler
     viewer.options.appearance.fullScreenMode = True
 
-    # Creating a report object and loading a report by URL
+    # Creating a report object
     report = StiReport()
+
+    # Loading a report by URL
+    # This method does not load the report object on the server side, it only generates the necessary JavaScript code
+    # The report will be loaded into a JavaScript object on the client side
     reportUrl = url_for('static', filename = 'reports/SimpleList.mrt')
     report.loadFile(reportUrl)
 

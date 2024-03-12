@@ -7,8 +7,10 @@ Changing_the_Viewer_Theme = app = Blueprint('Changing_the_Viewer_Theme', __name_
 
 @app.route('/Changing_the_Viewer_Theme', methods = ['GET', 'POST'])
 def index():
-    # Creating a viewer object and defining options (setting the theme, background color, toolbar mode)
+    # Creating a viewer object
     viewer = StiViewer()
+
+    # Defining viewer options: interface theme, background color, toolbar mode
     viewer.options.appearance.theme = enums.StiViewerTheme.OFFICE_2022_BLACK_GREEN
     viewer.options.appearance.backgroundColor = 'black'
     viewer.options.toolbar.displayMode = enums.StiToolbarDisplayMode.SEPARATED
@@ -17,8 +19,12 @@ def index():
     if viewer.processRequest(request):
         return viewer.getFrameworkResponse()
     
-    # Creating a report object and loading a report by URL
+    # Creating a report object
     report = StiReport()
+
+    # Loading a report by URL
+    # This method does not load the report object on the server side, it only generates the necessary JavaScript code
+    # The report will be loaded into a JavaScript object on the client side
     reportUrl = url_for('static', filename = 'reports/SimpleList.mrt')
     report.loadFile(reportUrl)
 

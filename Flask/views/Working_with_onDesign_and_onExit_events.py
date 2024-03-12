@@ -34,9 +34,15 @@ def saveReport(args: StiReportEventArgs):
 
 @app.route('/Working_with_onDesign_and_onExit_events', methods = ['GET', 'POST'])
 def index():
-    # Creating a viewer object, defining JavaScript events, defining options (setting the full-screen and toolbar mode, show design button)
+    # Creating a viewer object
     viewer = StiViewer()
+
+    # Defining viewer events
+    # When assigning a function name as a string, it will be called on the JavaScript client side
+    # When assigning a function itself, it will be called on the Python server side
     viewer.onDesignReport += 'viewerDesign'
+
+    # Defining viewer options: setting full-screen and toolbar mode, displaying the Design button
     viewer.options.appearance.fullScreenMode = True
     viewer.options.toolbar.showDesignButton = True
     viewer.options.toolbar.displayMode = StiToolbarDisplayMode.SEPARATED
@@ -45,8 +51,12 @@ def index():
     if viewer.processRequest(request):
         return viewer.getFrameworkResponse()
     
-    # Creating a report object and loading a report by URL
+    # Creating a report object
     report = StiReport()
+
+    # Loading a report by URL
+    # This method does not load the report object on the server side, it only generates the necessary JavaScript code
+    # The report will be loaded into a JavaScript object on the client side
     reportUrl = url_for('static', filename = 'reports/SimpleList.mrt')
     report.loadFile(reportUrl)
 
@@ -63,10 +73,16 @@ def index():
 
 @app.route('/Working_with_onDesign_and_onExit_events/designer', methods = ['GET', 'POST'])
 def designer():
-    # Creating a designer object, defining JavaScript and Python events, defining options (setting the full-screen and toolbar mode, show exit menu item)
+    # Creating a designer object
     designer = StiDesigner()
+
+    # Defining designer events
+    # When assigning a function name as a string, it will be called on the JavaScript client side
+    # When assigning a function itself, it will be called on the Python server side
     designer.onExit += 'designerExit'
     designer.onSaveReport += saveReport
+
+    # Defining designer options: setting the full-screen and toolbar mode, displaying the Exit menu item
     designer.options.appearance.fullScreenMode = True
     designer.options.toolbar.showFileMenuExit = True
 
@@ -74,8 +90,12 @@ def designer():
     if designer.processRequest(request):
         return designer.getFrameworkResponse()
     
-    # Creating a report object and loading a report by URL
+    # Creating a report object
     report = StiReport()
+
+    # Loading a report by URL
+    # This method does not load the report object on the server side, it only generates the necessary JavaScript code
+    # The report will be loaded into a JavaScript object on the client side
     reportUrl = url_for('static', filename = 'reports/SimpleList.mrt')
     report.loadFile(reportUrl)
 
