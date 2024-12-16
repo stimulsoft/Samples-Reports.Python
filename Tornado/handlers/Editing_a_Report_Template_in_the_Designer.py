@@ -8,6 +8,7 @@ class IndexHandler(RequestHandler):
     def get(self):
         # Creating a designer object
         designer = StiDesigner()
+        designer.javascript.appendHead('<link rel="shortcut icon" href="' + self.static_url('favicon.ico') + '" type="image/x-icon">')
 
         # If the request processing was successful, you need to return the result to the client side
         if designer.processRequest(self.request):

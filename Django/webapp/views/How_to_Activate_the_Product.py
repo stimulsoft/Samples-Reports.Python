@@ -1,4 +1,5 @@
 from django.templatetags.static import static
+from stimulsoft_reports import StiLicense
 from stimulsoft_reports.report import StiReport
 from stimulsoft_reports.viewer import StiViewer
 
@@ -6,14 +7,15 @@ from stimulsoft_reports.viewer import StiViewer
 def index(request):
     # Creating a viewer object
     viewer = StiViewer()
+    viewer.javascript.appendHead('<link rel="shortcut icon" href="' + static('favicon.ico') + '" type="image/x-icon">')
 
     # If the request processing was successful, you need to return the result to the client side
     if viewer.processRequest(request):
         return viewer.getFrameworkResponse()
     
     # You can use one of the methods below to register your license key
-    # viewer.license.setFile(static('private/license.key'))
-    # viewer.license.setKey('6vJhGtLLLz2GNviWmUTrhSqnO...')
+    # StiLicense.setFile(static('private/license.key'))
+    # StiLicense.setKey('6vJhGtLLLz2GNviWmUTrhSqnO...')
     
     # Creating a report object
     report = StiReport()

@@ -6,6 +6,7 @@ from stimulsoft_reports.designer import StiDesigner
 def index(request):
     # Creating a designer object
     designer = StiDesigner()
+    designer.javascript.appendHead('<link rel="shortcut icon" href="' + static('favicon.ico') + '" type="image/x-icon">')
 
     # If the request processing was successful, you need to return the result to the client side
     if designer.processRequest(request):

@@ -9,6 +9,7 @@ Localizing_the_Designer = app = Blueprint('Localizing_the_Designer', __name__)
 def index():
     # Creating a designer object
     designer = StiDesigner()
+    designer.javascript.appendHead('<link rel="shortcut icon" href="' + url_for('static', filename = 'favicon.ico') + '" type="image/x-icon">')
 
     # Defining the required interface localization
     # The list of available localizations can be obtained from the GitHub repository:

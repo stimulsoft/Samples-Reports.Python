@@ -1,4 +1,4 @@
-from flask import Blueprint, request, make_response, url_for
+from flask import Blueprint, request, render_template, url_for
 from stimulsoft_reports.report import StiReport
 from stimulsoft_reports.report.enums import StiEngineType, StiExportFormat
 
@@ -7,6 +7,9 @@ Exporting_a_Report_from_Code_on_the_Server_Side = app = Blueprint('Exporting_a_R
 
 @app.route('/Exporting_a_Report_from_Code_on_the_Server_Side', methods = ['GET', 'POST'])
 def index():
+    # Defining the HTML page title
+    title = 'Exporting a Report from Code on the Server-Side'
+
     # Creating a report object
     report = StiReport()
 
@@ -39,5 +42,5 @@ def index():
         # If there is a build error, you can display the error text.
         message = report.nodejs.error
     
-    # Returning a text message as the server response.
-    return make_response(message)
+    # Rendering an HTML template with a text message as the server response.
+    return render_template('Server_Side_Message.html', title = title, message = message)

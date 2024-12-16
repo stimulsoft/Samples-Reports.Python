@@ -1,4 +1,4 @@
-from flask import Blueprint, make_response
+from flask import Blueprint, render_template
 from stimulsoft_reports import StiNodeJs
 
 Configuring_and_Installing_Node_js = app = Blueprint('Configuring_and_Installing_Node_js', __name__)
@@ -6,6 +6,9 @@ Configuring_and_Installing_Node_js = app = Blueprint('Configuring_and_Installing
 
 @app.route('/Configuring_and_Installing_Node_js', methods = ['GET', 'POST'])
 def index():
+    # Defining the HTML page title
+    title = 'Configuring and Installing Node.js'
+
     # Creating a Node.js object
     nodejs = StiNodeJs()
 
@@ -28,7 +31,7 @@ def index():
     # Installation status or error text from Node.js engine.
     message = 'The installation was successful.' if result else nodejs.error
 
-    # Returning a text message as the server response.
-    return make_response(message)
+    # Rendering an HTML template with a text message as the server response.
+    return render_template('Server_Side_Message.html', title = title, message = message)
 
     

@@ -9,6 +9,7 @@ Showing_a_Report_in_the_Viewer = app = Blueprint('Showing_a_Report_in_the_Viewer
 def index():
     # Creating a viewer object
     viewer = StiViewer()
+    viewer.javascript.appendHead('<link rel="shortcut icon" href="' + url_for('static', filename = 'favicon.ico') + '" type="image/x-icon">')
 
     # If the request processing was successful, you need to return the result to the client side
     if viewer.processRequest(request):

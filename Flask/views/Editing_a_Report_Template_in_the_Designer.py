@@ -9,6 +9,7 @@ Editing_a_Report_Template_in_the_Designer = app = Blueprint('Editing_a_Report_Te
 def index():
     # Creating a designer object
     designer = StiDesigner()
+    designer.javascript.appendHead('<link rel="shortcut icon" href="' + url_for('static', filename = 'favicon.ico') + '" type="image/x-icon">')
 
     # If the request processing was successful, you need to return the result to the client side
     if designer.processRequest(request):

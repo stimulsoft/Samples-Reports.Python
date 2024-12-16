@@ -34,6 +34,7 @@ def saveReport(args: StiReportEventArgs):
 def index():
     # Creating a designer object
     designer = StiDesigner()
+    designer.javascript.appendHead('<link rel="shortcut icon" href="' + url_for('static', filename = 'favicon.ico') + '" type="image/x-icon">')
 
     # Defining designer events
     # When assigning a function name as a string, it will be called on the JavaScript client side

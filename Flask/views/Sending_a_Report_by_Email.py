@@ -26,6 +26,7 @@ def emailReport(args: StiEmailEventArgs):
 def index():
     # Creating a viewer object
     viewer = StiViewer()
+    viewer.javascript.appendHead('<link rel="shortcut icon" href="' + url_for('static', filename = 'favicon.ico') + '" type="image/x-icon">')
 
     # Defining viewer options: displaying the Send Email button
     viewer.options.toolbar.showSendEmailButton = True

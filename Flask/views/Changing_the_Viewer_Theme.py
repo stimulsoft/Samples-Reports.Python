@@ -9,6 +9,7 @@ Changing_the_Viewer_Theme = app = Blueprint('Changing_the_Viewer_Theme', __name_
 def index():
     # Creating a viewer object
     viewer = StiViewer()
+    viewer.javascript.appendHead('<link rel="shortcut icon" href="' + url_for('static', filename = 'favicon.ico') + '" type="image/x-icon">')
 
     # Defining viewer options: interface theme, background color, toolbar mode
     viewer.options.appearance.theme = enums.StiViewerTheme.OFFICE_2022_BLACK_GREEN

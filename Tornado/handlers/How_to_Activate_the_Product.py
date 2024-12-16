@@ -1,5 +1,5 @@
 from tornado.web import RequestHandler
-from stimulsoft_reports import StiHandler
+from stimulsoft_reports import StiHandler, StiLicense
 from stimulsoft_reports.report import StiReport
 from stimulsoft_reports.viewer import StiViewer
 
@@ -8,14 +8,15 @@ class IndexHandler(RequestHandler):
     def get(self):
         # Creating a viewer object
         viewer = StiViewer()
+        viewer.javascript.appendHead('<link rel="shortcut icon" href="' + self.static_url('favicon.ico') + '" type="image/x-icon">')
 
         # If the request processing was successful, you need to return the result to the client side
         if viewer.processRequest(self.request):
             return viewer.getFrameworkResponse(self)
         
         # You can use one of the methods below to register your license key
-        # viewer.license.setFile(self.static_url('private/license.key'))
-        # viewer.license.setKey('6vJhGtLLLz2GNviWmUTrhSqnO...')
+        # StiLicense.setFile(self.static_url('private/license.key'))
+        # StiLicense.setKey('6vJhGtLLLz2GNviWmUTrhSqnO...')
         
         # Creating a report object
         report = StiReport()

@@ -8,6 +8,7 @@ class IndexHandler(RequestHandler):
     def get(self):
         # Creating a viewer object
         viewer = StiViewer()
+        viewer.javascript.appendHead('<link rel="shortcut icon" href="' + self.static_url('favicon.ico') + '" type="image/x-icon">')
         
         # If the request processing was successful, you need to return the result to the client side
         if viewer.processRequest(self.request):

@@ -6,6 +6,7 @@ from stimulsoft_reports.viewer import StiViewer
 def index(request):
     # Creating a viewer object
     viewer = StiViewer()
+    viewer.javascript.appendHead('<link rel="shortcut icon" href="' + static('favicon.ico') + '" type="image/x-icon">')
     
     # If the request processing was successful, you need to return the result to the client side
     if viewer.processRequest(request):
