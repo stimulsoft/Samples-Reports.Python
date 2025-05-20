@@ -5,9 +5,13 @@ from stimulsoft_reports.designer import StiDesigner
 
 
 class IndexHandler(RequestHandler):
+    # A separate event handler is required to process POST requests
+    handler = StiHandler()
+
     def get(self):
-        # Creating a designer object
+        # Creating a designer object and assign an event handler
         designer = StiDesigner()
+        designer.handler = self.handler
 
         # If the request processing was successful, you need to return the result to the client side
         if designer.processRequest(self.request):
@@ -33,7 +37,6 @@ class IndexHandler(RequestHandler):
         self.render('Editing_a_Report_Template_in_the_Designer_in_an_HTML_template.html', designerJavaScript = js, designerHtml = html)
     
     def post(self):
-        # A separate event handler is required to process POST requests
-        handler = StiHandler()
-        if handler.processRequest(self.request):
-            return handler.getFrameworkResponse(self)
+        # Processing POST requests
+        if self.handler.processRequest(self.request):
+            return self.handler.getFrameworkResponse(self)

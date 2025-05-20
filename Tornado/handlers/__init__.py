@@ -2,6 +2,7 @@ from handlers import Showing_a_Report_in_the_Viewer
 from handlers import Showing_a_Report_in_the_Viewer_in_an_HTML_template
 from handlers import Editing_a_Report_Template_in_the_Designer
 from handlers import Editing_a_Report_Template_in_the_Designer_in_an_HTML_template
+from handlers import Saving_a_Report_Template_on_the_Server_Side
 from handlers import Exporting_a_Report_from_Code
 from handlers import Registering_a_Data_from_Code
 from handlers import How_to_Activate_the_Product

@@ -11,9 +11,13 @@ class IndexHandler(RequestHandler):
 
 
 class ExportHandler(RequestHandler):
+    # A separate event handler is required to process POST requests
+    handler = StiHandler()
+
     def get(self):
-        # Creating a report object
+        # Creating a report object and assign an event handler
         report = StiReport()
+        report.handler = self.handler
 
         # If the request processing was successful, you need to return the result to the client side
         if report.processRequest(self.request):
@@ -53,7 +57,6 @@ class ExportHandler(RequestHandler):
         return self.render('Exporting_a_Report_from_Code.html', reportJavaScript = js, reportHtml = html)
     
     def post(self):
-        # A separate event handler is required to process POST requests
-        handler = StiHandler()
-        if handler.processRequest(self.request):
-            return handler.getFrameworkResponse(self)
+        # Processing POST requests
+        if self.handler.processRequest(self.request):
+            return self.handler.getFrameworkResponse(self)

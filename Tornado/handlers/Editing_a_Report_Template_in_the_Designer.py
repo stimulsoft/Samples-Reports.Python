@@ -5,9 +5,13 @@ from stimulsoft_reports.designer import StiDesigner
 
 
 class IndexHandler(RequestHandler):
+    # A separate event handler is required to process POST requests
+    handler = StiHandler()
+
     def get(self):
-        # Creating a designer object
+        # Creating a designer object and assign an event handler
         designer = StiDesigner()
+        designer.handler = self.handler
         designer.javascript.appendHead('<link rel="shortcut icon" href="' + self.static_url('favicon.ico') + '" type="image/x-icon">')
 
         # If the request processing was successful, you need to return the result to the client side
@@ -30,8 +34,7 @@ class IndexHandler(RequestHandler):
         return designer.getFrameworkResponse(self)
     
     def post(self):
-        # A separate event handler is required to process POST requests
-        handler = StiHandler()
-        if handler.processRequest(self.request):
-            return handler.getFrameworkResponse(self)
+        # Processing POST requests
+        if self.handler.processRequest(self.request):
+            return self.handler.getFrameworkResponse(self)
 

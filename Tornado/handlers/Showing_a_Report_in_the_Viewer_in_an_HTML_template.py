@@ -5,9 +5,13 @@ from stimulsoft_reports.viewer import StiViewer
 
 
 class IndexHandler(RequestHandler):
+    # A separate event handler is required to process POST requests
+    handler = StiHandler()
+
     def get(self):
-        # Creating a viewer object
+        # Creating a viewer object and assign an event handler
         viewer = StiViewer()
+        viewer.handler = self.handler
 
         # Defining viewer options: enabling the scrollbar, setting the width and height of the viewer
         viewer.options.appearance.scrollbarsMode = True
@@ -38,7 +42,6 @@ class IndexHandler(RequestHandler):
         self.render('Showing_a_Report_in_the_Viewer_in_an_HTML_template.html', viewerJavaScript = js, viewerHtml = html)
     
     def post(self):
-        # A separate event handler is required to process POST requests
-        handler = StiHandler()
-        if handler.processRequest(self.request):
-            return handler.getFrameworkResponse(self)
+        # Processing POST requests
+        if self.handler.processRequest(self.request):
+            return self.handler.getFrameworkResponse(self)

@@ -5,9 +5,13 @@ from stimulsoft_reports.viewer import StiViewer
 
 
 class IndexHandler(RequestHandler):
+    # A separate event handler is required to process POST requests
+    handler = StiHandler()
+
     def get(self):
-        # Creating a viewer object
+        # Creating a viewer object and assign an event handler
         viewer = StiViewer()
+        viewer.handler = self.handler
         viewer.javascript.appendHead('<link rel="shortcut icon" href="' + self.static_url('favicon.ico') + '" type="image/x-icon">')
         
         # If the request processing was successful, you need to return the result to the client side
@@ -30,7 +34,6 @@ class IndexHandler(RequestHandler):
         return viewer.getFrameworkResponse(self)
     
     def post(self):
-        # A separate event handler is required to process POST requests
-        handler = StiHandler()
-        if handler.processRequest(self.request):
-            return handler.getFrameworkResponse(self)
+        # Processing POST requests
+        if self.handler.processRequest(self.request):
+            return self.handler.getFrameworkResponse(self)

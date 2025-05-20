@@ -5,9 +5,13 @@ from stimulsoft_reports.viewer import StiViewer
 
 
 class IndexHandler(RequestHandler):
+    # A separate event handler is required to process POST requests
+    handler = StiHandler()
+
     def get(self):
-        # Creating a viewer object
+        # Creating a viewer object and assign an event handler
         viewer = StiViewer()
+        viewer.handler = self.handler
 
         # Defining viewer events
         # When assigning a function name as a string, it will be called on the JavaScript client side
@@ -38,7 +42,6 @@ class IndexHandler(RequestHandler):
         self.render('Registering_a_Data_from_Code.html', viewerJavaScript = js, viewerHtml = html)
     
     def post(self):
-        # A separate event handler is required to process POST requests
-        handler = StiHandler()
-        if handler.processRequest(self.request):
-            return handler.getFrameworkResponse(self)
+        # Processing POST requests
+        if self.handler.processRequest(self.request):
+            return self.handler.getFrameworkResponse(self)
