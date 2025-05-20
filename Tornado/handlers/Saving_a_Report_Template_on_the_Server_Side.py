@@ -1,7 +1,6 @@
 import json
 import os
 from tornado.web import RequestHandler
-from stimulsoft_data_adapters.classes.StiPath import StiPath
 from stimulsoft_reports import StiHandler, StiResult
 from stimulsoft_reports.designer import StiDesigner
 from stimulsoft_reports.events import StiReportEventArgs
@@ -16,7 +15,7 @@ class IndexHandler(RequestHandler):
     def saveReport(self, args: StiReportEventArgs):
 
         # Getting the absolute path to the report file to save
-        filePath = StiPath.normalize(os.path.normpath(os.getcwd() + self.static_url('reports/' + args.fileName)))
+        filePath = os.path.normpath(os.getcwd() + self.static_url('reports/' + args.fileName)).split('?')[0]
         
         try:
             # Opening the file for saving, converting the report to JSON and saving it
