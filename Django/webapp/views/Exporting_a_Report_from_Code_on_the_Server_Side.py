@@ -1,12 +1,10 @@
-from flask import Blueprint, request, render_template, url_for, current_app
+from django.contrib.staticfiles import finders
+from django.shortcuts import render
 from stimulsoft_reports.report import StiReport
 from stimulsoft_reports.report.enums import StiEngineType, StiExportFormat
 
-Exporting_a_Report_from_Code_on_the_Server_Side = app = Blueprint('Exporting_a_Report_from_Code_on_the_Server_Side', __name__)
 
-
-@app.route('/Exporting_a_Report_from_Code_on_the_Server_Side', methods = ['GET', 'POST'])
-def index():
+def index(request):
     # Defining the HTML page title
     title = 'Exporting a Report from Code on the Server-Side'
 
@@ -23,7 +21,7 @@ def index():
     # Loading a report by URL
     # This method loads a report file and stores it as a compressed string in an object.
     # The report will be loaded from this string into a JavaScript object when using Node.js
-    reportPath = current_app.static_folder + '/reports/SimpleList.mrt'
+    reportPath = finders.find('reports/SimpleList.mrt')
     report.loadFile(reportPath)
 
     # Building a report
@@ -38,10 +36,10 @@ def index():
         
         # buffer = report.exportDocument(StiExportFormat.PDF)
 
-        # filePath = current_app.static_folder + '/reports/SimpleList.pdf'
+        # filePath = finders.find('reports') + '/SimpleList.pdf'
         # result = report.exportDocument(StiExportFormat.PDF, filePath)
         # message = result
-
+        
         message = f'The exported document takes {len(buffer)} bytes.'
         message += '<br><br><br>' + buffer.decode('utf-8')
     else:
@@ -49,4 +47,4 @@ def index():
         message = report.nodejs.error
     
     # Rendering an HTML template with a text message as the server response.
-    return render_template('Server_Side_Message.html', title = title, message = message)
+    return render(request, 'Server_Side_Message.html', {'title': title, 'message': message})
