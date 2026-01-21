@@ -42,6 +42,9 @@ Before starting, you should install the framework and component libraries used i
 After that, in your browser, you can navigate to the following address:  
 http://127.0.0.1:8040/
 
+Before running the server-side examples for report generation and export, you need to run the `Configuring and Installing Node.js` script first. This script verifies the installed Node.js version and installs all required Node.js dependencies needed for working with reports on the server.
+
+
 ## About Stimulsoft Reports.PYTHON
 Stimulsoft Reports.PYTHON comprises a set of components for creating, viewing, exporting, and printing reports in applications and projects written in Python. The product supports connections of multiple data types, allowing you to work with reports using client-server technology, and also offers extensive capabilities for data visualization and analysis.
 
