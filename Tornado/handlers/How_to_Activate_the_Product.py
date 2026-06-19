@@ -19,7 +19,7 @@ class IndexHandler(RequestHandler):
             return viewer.getFrameworkResponse(self)
         
         # You can use one of the methods below to register your license key
-        # StiLicense.setFile(self.static_url('private/license.key'))
+        # StiLicense.setFile(self.static_url('private/stimulsoft.key'))
         # StiLicense.setKey('6vJhGtLLLz2GNviWmUTrhSqnO...')
         
         # Creating a report object

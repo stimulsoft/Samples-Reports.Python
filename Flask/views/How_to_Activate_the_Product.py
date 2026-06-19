@@ -17,7 +17,7 @@ def index():
         return viewer.getFrameworkResponse()
     
     # You can use one of the methods below to register your license key
-    # StiLicense.setFile(url_for('static', filename='private/license.key'))
+    # StiLicense.setFile(url_for('static', filename='private/stimulsoft.key'))
     # StiLicense.setKey('6vJhGtLLLz2GNviWmUTrhSqnO...')
     
     # Creating a report object
